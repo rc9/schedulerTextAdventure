@@ -5,9 +5,9 @@ s --> np(Number), vp(Number).
 np(singular) --> d, n.
 np(plural) --> ns.
 
-o(day) --> ndays.
-o(day) --> nday.
-o(ntime) --> ntime.
+object(day) --> ndays.
+object(day) --> nday.
+object(ntime) --> ntime.
 
 vp(singular) --> b, a, addp.
 vp(singular) --> v, addp.
@@ -17,16 +17,16 @@ vp(plural) --> vs, addp.
 addp --> np(_).
 addp --> pp.
 
-pp --> dayp, o(day).
-pp --> timep, o(ntime), timep, o(ntime).
+pp --> dayp, object(day).
+pp --> timep, object(ntime), timep, object(ntime).
 
 
 d --> [the]; [a]; [].
-n --> [monday];[hanna].
+n --> [hanna].
 ns --> [mondays].
 nday --> [monday].
 ndays --> [mondays].
-ntime --> [3:00]; [18:00].
+ntime --> [3:30]; [18:00].
 a --> [busy]; [free].
 b --> [is].
 bs --> [are].
@@ -44,3 +44,4 @@ for - same as above
 1) can be used for certain amount of hours ex. for x hours
 2) can be used to indicate a person, Mondays work for Hanna.
 */
+
