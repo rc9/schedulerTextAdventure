@@ -60,6 +60,21 @@ blackmail(kim) :-
 % fall through in case blackmailing fails
 blackmail(Person) :-
 	writeSen(['You can\'t blackmail ', Person]).
+
+% the case where you have all the advice you need
+write_code :-
+	advice(toImportXML),
+	advice(toTokenizeInput),
+	advice(toChangeXMLToTimestamp),
+	advice(toSwitchProject),
+	writeSen('OMFG you have all the pieces to the puzzle! The answer was right infront of your face the entire time!'),
+	writeSen('All you had to do was make a mediocre text adventure game! Who knew???'),
+	writeSen('So much easier! Prolog for the win!').
+	%TODO end game somehow.
+
+% still missing some advice
+write_code :-
+	write('Hmmm. You\'re not making progress and you can\'t quite figure out what\'s wrong. Maybe you need some inspiration from someone else...').
 	
 
 % writeSen(List) writes out the list into a string.
