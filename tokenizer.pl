@@ -68,7 +68,7 @@ char_type(Code,alpha,Code):-	% lower-case letters
     !.
 
 char_type(Code,alpha,NewCode):- % upper-case letters
-    65 =< Code, Code >= 90,
+    65 =< Code, Code =< 90,
     !, NewCode is Code + 32.	% (translate to lower case)
 
 char_type(Code,special,Code).	% all others
