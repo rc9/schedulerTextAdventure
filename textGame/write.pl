@@ -1,3 +1,4 @@
+:- [world.pl]
 
 play:-
 	dynamic_facts, % inserts initial data to the world
@@ -19,6 +20,7 @@ help:-
   	tab(1),write('seduce someone		(ex. seduce TA'),nl,
   	tab(1),write('blackmail someone		(ex. blackmail policeman'),nl,
   	tab(1),write('buy something			(ex. buy drink from bartender'),nl,
+  	tab(1),write('b')
 	nl,
   	write('Hit any key to continue.'),nl,
   	get0(_),
@@ -31,6 +33,18 @@ go(Place) :-
 	look.
 go(_) :- look.
 
+% punch(+Person) punches someone in the location
+% and results in a policeman to put you in a jail.
+punch(Person) :-
+	isHere(Person),!,
+	write('Ohoh someone called a policeman. He\'s taking you to a jail...'), nl,
+	retract(here(_)),
+	asserta(here(jail)),
+	look.
+punch(_).
+
+% bribe
+
 % isHere(+Person) checks if the person the user requested
 % is in the current location.
 isHere(Person) :-
@@ -42,7 +56,7 @@ isHere(Person) :-
 
 % writeSen(List) writes out the list into a string.
 writeSen([]) :- write('.'), nl.
-writeSen([H|T]) :- write(H), respond(T).
+writeSen([H|T]) :- write(H), writeSen(T).
 
 % look lists the things in a room, and the connections
 % assertz(here(StartLocation)) at the beginning.
