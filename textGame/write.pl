@@ -8,7 +8,7 @@ play:-
 	write('You can type "help" along the way if you need help on how to play'),nl,
 	write('Good Luck!').
 
-hint:-	
+help:-	
 	write('Commands you can use to play the game:'),nl,
   	nl,
   	tab(1),write('go to a place         (ex. go to the lab)'),nl,
@@ -53,10 +53,10 @@ look:-
   	write('You can go to the following places:'),nl,
   	list_connections(Here),
   	write('You can see the following people:'),nl,
-  	list_people(Here).
+  	list_peopleAt(Here).
 
-list_people(Place):-
-  	people(X,Place),
+list_peopleAt(Place):-
+  	at(X,Place),
   	tab(2),write(X),nl,
   	fail.
 list_people(_).
