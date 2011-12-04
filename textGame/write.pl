@@ -35,7 +35,7 @@ go(Place) :-
 go(_) :- look.
 
 % where
-where :- findall(X,here(X),Z).  
+where :- findall(X,here(X),Z), write(Z), nl.
 
 % punch(+Person) punches someone in the location
 % and results in a policeman to put you in a jail.
