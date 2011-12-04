@@ -1,13 +1,14 @@
 :- [world.pl]
 
-play:-
+inner_play:-
 	dynamic_facts, % inserts initial data to the world
 	write('Your goal as a CS student is to complete a project ans get an A+.'),nl,
 	write('However, you will encounter many obstacles'),nl,
 	write('in order to complete a project.'),nl,
 	n,
 	write('You can type "help" along the way if you need help on how to play'),nl,
-	write('Good Luck!').
+	write('Good Luck!'),nl,
+	look.
 
 help:-	
 	write('Commands you can use to play the game:'),nl,
@@ -20,7 +21,7 @@ help:-
   	tab(1),write('seduce someone		(ex. seduce TA'),nl,
   	tab(1),write('blackmail someone		(ex. blackmail policeman'),nl,
   	tab(1),write('buy something			(ex. buy drink from bartender'),nl,
-  	tab(1),write('b')
+  	tab(1),write('bribe someone			(ex. bribe jailer)'), nl,
 	nl,
   	write('Hit any key to continue.'),nl,
   	get0(_),
@@ -36,14 +37,15 @@ go(_) :- look.
 % punch(+Person) punches someone in the location
 % and results in a policeman to put you in a jail.
 punch(Person) :-
-	isHere(Person),!,
+	isHere(Person),
 	write('Ohoh someone called a policeman. He\'s taking you to a jail...'), nl,
 	retract(here(_)),
 	asserta(here(jail)),
 	look.
 punch(_).
 
-% bribe
+% bribe(+Person) you\'re trying to bribe someone to get easy shortcut.
+
 
 % isHere(+Person) checks if the person the user requested
 % is in the current location.
