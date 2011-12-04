@@ -9,7 +9,7 @@ at(bartender, bar).
 at(policeman, bar).
 at(ta, lab).
 at(jailer, jail).
-at(kim, lab).
+at('Kim', lab).
 
 person(mom).
 person(brother).
@@ -17,7 +17,7 @@ person(bartender).
 person(policeman).
 person(ta).
 person(jailer).
-person(kim).
+person('Kim').
 
 action(blackmail, lab).
 action(blackmail, bar).
