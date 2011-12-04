@@ -23,3 +23,15 @@ person(jailer).
 person(prisoner).
 person(kim).
 person(librarian).
+
+dynamic_facts:-
+	assertz(here(house)).
+
+%actions
+
+% goto(+Place)
+% moves your character to Place 
+% and updates KB
+goto(Place) :-
+	retract(here(_)),
+	asserta(here(Place)).
