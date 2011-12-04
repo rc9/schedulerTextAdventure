@@ -1,9 +1,9 @@
 %%%%GRAMMAR%%%%%
-
 :-[world].
 
 %phrase(-Predicate, -Object, +InputList, -EmptyList)
-phrase(Pred, Obj) --> vp(SubCat, Pred), np(SubCat, Obj).
+phrase([Pred, Obj]) --> vp(SubCat, Pred), np(SubCat, Obj).
+phrase([Pred]) --> vp(intrans, Pred).
 
 %vp(-Subcategory, -Predicate, +InputList, -WithoutVerb)
 vp(location, go) --> [go];[go,to];[goto].
@@ -33,12 +33,12 @@ np(SubCat, Obj) --> n_bar(SubCat,Obj).
 
 %n_bar(-Subcategory, -Object, +InputList, -WithoutNoun)
 n_bar(trans_p, Obj) --> n(Obj), {person(Obj)}.
-n_bar(trans_t, Obj) --> n(Obj), {thing(Obj)}.
+n_bar(trans_t, Obj) --> n(Obj). % {thing(Obj)}.
 n_bar(location, Place) --> n(Place), {place(Place)}.
 
 %n(-Object, +InputList, -WithoutNoun) 
 n(bar) --> [bar].
-n(home) --> [home].
+n(house) --> [house];[home].
 n(lab) --> [lab].
 %n(jail) --> [jail].
 n(policeman) --> [policeman];[popo];[po-po].
@@ -54,6 +54,7 @@ n('text adventure game') --> [text,adventure,game];[text,game];[game].
 %d(+InputList, -WithoutDeterminer)
 d --> [the];[a].
 
+ /*
 %Places
 %place(+Place)
 place(home).
@@ -75,3 +76,5 @@ thing(scheduler).
 thing('text adventure game').
 thing(drink).
 thing(shoulder).
+
+*/
