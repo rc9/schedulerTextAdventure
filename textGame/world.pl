@@ -7,7 +7,7 @@ at(mom, house).
 at(brother, house).
 at(bartender, bar).
 at(policeman, bar).
-at(ta, lab).
+at('TA', lab).
 at(jailer, jail).
 at('Kim', lab).
 
@@ -15,7 +15,7 @@ person(mom).
 person(brother).
 person(bartender).
 person(policeman).
-person(ta).
+person('TA').
 person(jailer).
 person('Kim').
 
