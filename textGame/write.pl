@@ -49,12 +49,10 @@ bribe(jailer) :-
 	isHere(Person),
 	write('I can\'t believe you deciede to bribe jailer...'),nl,
 	write('Oh well...so now you\'re back home. What are you gonna do?'),nl,
-	retract(here(jail)),
-	asserta(here(house)),!,
-	look.
+	go(house).
 bribe(Person) :-
 	isHere(Person),
-	writeSen(['You got a suspicious dirty look from ',Person,'...'),nl.
+	writeSen(['You got a suspicious dirty look from ',Person,'...']),nl.
 bribe(_).
 	
 % seduce(+Person) you're trying to seduce someone to get out of trouble.
