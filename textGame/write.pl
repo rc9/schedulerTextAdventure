@@ -6,22 +6,22 @@ inner_play:-
 	write('However, you will encounter many obstacles'),nl,
 	write('in order to complete a project.'),nl,
 	nl,
-	write('You can type "help" along the way if you need help on how to play'),nl,
+	write('You can type "help" along the way if you need help on how to play.'),nl,
 	write('Good Luck!'),nl,
 	look.
 
 help:-	
 	write('Commands you can use to play the game:'),nl,
   	nl,
-  	tab(1),write('go to a place         (ex. go to the lab)'),nl,
-  	tab(1),write('choose a project		(ex. choose schedular)'),nl,
-  	tab(1),write('write code			(ex. write code'),nl,
-  	tab(1),write('cry to someone		(ex. cry to Kim'),nl,
-  	tab(1),write('punch someone			(ex. punch the bartender'),nl,
-  	tab(1),write('seduce someone		(ex. seduce TA'),nl,
-  	tab(1),write('blackmail someone		(ex. blackmail policeman'),nl,
-  	tab(1),write('drink something		(ex. buy drink from bartender'),nl,
-  	tab(1),write('bribe someone			(ex. bribe jailer)'), nl,
+  	tab(2),write('go to a place         (ex. go to the lab)'),nl,
+  	tab(2),write('choose a project		(ex. choose schedular)'),nl,
+  	tab(2),write('write code			(ex. write code'),nl,
+  	tab(2),write('cry to someone		(ex. cry to Kim'),nl,
+  	tab(2),write('punch someone			(ex. punch the bartender'),nl,
+  	tab(2),write('seduce someone		(ex. seduce TA'),nl,
+  	tab(2),write('blackmail someone		(ex. blackmail policeman'),nl,
+  	tab(2),write('drink something		(ex. buy drink from bartender'),nl,
+  	tab(2),write('bribe someone			(ex. bribe jailer)'), nl,
 	nl,
   	write('Hit any key to continue.'),nl,
   	get0(_),
@@ -30,7 +30,7 @@ help:-
 % go(+Place) moves the player to a new location
 go(Place) :-
 	retract(here(_)),
-	asserta(here(Place)),
+	asserta(here(Place)),!,
 	look.
 go(_) :- look.
 
@@ -72,32 +72,29 @@ drink(_):-
 	write('What a smart bartender.'),nl,
 	store_advice(toChangeXMLToTimestamp);
 	write('You can drink only at the bar'),nl).
-	
-%
 
 % look lists the things in a room, and the connections
 % assertz(here(StartLocation)) at the beginning.
 look:-
   	here(Here),
   	writeSen(['You are in the ',Here]),
-  	write('You can go to the following places:'),nl,
-  	list_connections(Here),
   	write('You can see the following people:'),nl,
-  	list_peopleAt(Here).
+  	list_peopleAt(Here),
+  	write('You can go to the following places:'),nl,
+  	list_connections(Here).
 
 list_peopleAt(Place):-
   	at(X,Place),
   	tab(2),write(X),nl,
   	fail.
-list_people(_).
+list_peopleAt(_).
 
 list_connections(Place):-
   	connect(Place,X),
   	tab(2),write(X),nl,
   	fail.
 list_connections(jail):-
-	write('You have no where to go. Wait until policeman lets you out.'),
-	fail.
+	write('You have no where to go. Wait until policeman lets you out.'),nl.
 list_connections(_).
 
 connect(X,Y):- path(X,Y).
