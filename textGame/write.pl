@@ -46,7 +46,7 @@ punch(_).
 
 % bribe(+Person) you\'re trying to bribe someone to get easy shortcut.
 bribe(jailer) :-
-	isHere(Person),
+	isHere(jailer),
 	write('I can\'t believe you deciede to bribe the jailer...'),nl,
 	write('Oh well...so now you\'re back home. What are you gonna do?'),nl,
 	go(house).
