@@ -9,7 +9,7 @@ at(bartender, bar).
 at(policeman, bar).
 at(ta, lab).
 at(jailer, jail).
-at('Kim', lab).
+at(kim, lab).
 
 person(mom).
 person(brother).
@@ -17,7 +17,7 @@ person(bartender).
 person(policeman).
 person(ta).
 person(jailer).
-person('Kim').
+person(kim).
 
 action(blackmail, lab).
 action(blackmail, bar).
@@ -48,10 +48,10 @@ store_advice(Advice) :-
 	not(advice(Advice)), % ensure we don't already have this in KB
 	asserta(advice(Advice)).
 	
-blackmail('Kim') :-
+blackmail(kim) :-
 	%TODO add humor and wit
-	isHere('Kim'),
-	writeSen(['You are about to blackmail ', 'Kim']),
+	isHere(kim),
+	writeSen(['You are about to blackmail ', kim]),
 	Advice='Madness takes its toll. Please have exact change.', % http://www.mtholyoke.edu/~emdurso/amusing.html
 	store_advice(toImportXML),
 	writeSen(['Kim has given you some great advice: ', Advice]),
