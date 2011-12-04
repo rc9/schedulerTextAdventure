@@ -53,7 +53,7 @@ blackmail('Kim') :-
 	isHere('Kim'),
 	writeSen(['You are about to blackmail ', 'Kim']),
 	Advice='Madness takes its toll. Please have exact change.', % http://www.mtholyoke.edu/~emdurso/amusing.html
-	store_advice(Advice),
+	store_advice(toImportXML),
 	writeSen(['Kim has given you some great advice: ', Advice]). 
 	
 % fall through in case blackmailing fails
