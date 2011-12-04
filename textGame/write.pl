@@ -11,14 +11,14 @@ play:-
 hint:-	
 	write('Commands you can use to play the game:'),nl,
   	nl,
-  	tab(1),write('go to a place         		(ex. go to the lab)'),nl,
-  	tab(1),write('start a project				(ex. start schedular)'),nl,
-  	tab(1),write('write code					(ex. write code'),nl,
-  	tab(1),write('cry on someone\'s shoulder	(ex. cry on Kim\'s shoulder'),nl,
-  	tab(1),write('punch someone					(ex. punch the bartender'),nl,
-  	tab(1),write('seduce someone				(ex. seduce TA'),nl,
-  	tab(1),write('blackmail someone				(ex. blackmail policeman'),nl,
-  	tab(1),write('buy something					(ex. buy drink from bartender'),nl,
+  	tab(1),write('go to a place         (ex. go to the lab)'),nl,
+  	tab(1),write('choose a project		(ex. choose schedular)'),nl,
+  	tab(1),write('write code			(ex. write code'),nl,
+  	tab(1),write('cry to someone		(ex. cry to Kim'),nl,
+  	tab(1),write('punch someone			(ex. punch the bartender'),nl,
+  	tab(1),write('seduce someone		(ex. seduce TA'),nl,
+  	tab(1),write('blackmail someone		(ex. blackmail policeman'),nl,
+  	tab(1),write('buy something			(ex. buy drink from bartender'),nl,
 	nl,
   	write('Hit any key to continue.'),nl,
   	get0(_),
@@ -30,6 +30,19 @@ go_to(Place) :-
 	asserta(here(Place)),
 	look.
 go_to(_) :- look.
+
+% isHere(Person) checks if the person the user requested
+% is in the current location.
+isHere(Person) :-
+	here(Here),
+	people(Person, Here), !.
+isHere(Person) :-
+	writeSen([Person, ' is not here']),
+	fail.
+
+% writeSen(List) writes out the list into a string.
+writeSen([]) :- write('.'), nl.
+writeSen([H|T]) :- write(H), respond(T).
 
 % look lists the things in a room, and the connections
 % assertz(here(StartLocation)) at the beginning.
