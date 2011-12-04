@@ -61,7 +61,7 @@ bribe(_).
 seduce('TA'):-
 	isHere('TA'),
 	write('what a corrupted TA... he gave you an advice to tokenize input'),nl,
-	asserta(advice(toTokenizeInput)).
+	store_advice(toTokenizeInput).
 seduce(Person):-
 	isHere(Person),
 	write('You\'re not gonna get any work done tonight...'),nl.
@@ -72,22 +72,8 @@ drink(_):-
 	( here(bar) -> write('Guess what?'),nl,
 	write('The bartender just thought you how to change the xml output line to epoch time stamp in prolog!! '), nl,
 	write('What a smart bartender.'),nl,
-	asserta(advice(toChangeXMLToTimestamp));
+	store_advice(toChangeXMLToTimestamp);
 	write('You can drink only at the bar'),nl).
-	
-
-% isHere(+Person) checks if the person the user requested
-% is in the current location.
-isHere(Person) :-
-	here(Here),
-	people(Person, Here), !.
-isHere(Person) :-
-	writeSen([Person, ' is not here']),
-	fail.
-
-% writeSen(List) writes out the list into a string.
-writeSen([]) :- write('.'), nl.
-writeSen([H|T]) :- write(H), writeSen(T).
 
 % look lists the things in a room, and the connections
 % assertz(here(StartLocation)) at the beginning.
