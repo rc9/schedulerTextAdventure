@@ -32,10 +32,13 @@ action(drink, bar).
 action(punch, _).
 action(seduce, _). %seduction can happen anywhere ;)
 
-dynamic_facts:-
-	assertz(here(house)).
 
-%actions
+% this needs to run at the start of the program
+dynamic_facts:-
+	assertz(here(house)),
+	assertz(advice(base)). % you are given base advice to start (it helps queries to have the predict always exist)
+
+%----actions-------
 
 % goto(+Place)
 % moves your character to Place 
@@ -43,3 +46,9 @@ dynamic_facts:-
 goto(Place) :-
 	retract(here(_)),
 	asserta(here(Place)).
+	
+% store_advice(+Advice)
+% stores a piece of advice in the KB
+store_advice(Advice) :-
+	not(advice(Advice)), % ensure we don't already have this in KB
+	asserta(advice(Advice)).
