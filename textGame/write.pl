@@ -45,7 +45,19 @@ punch(Person) :-
 punch(_).
 
 % bribe(+Person) you\'re trying to bribe someone to get easy shortcut.
-
+bribe(jailer) :-
+	isHere(Person),
+	write('I can\'t believe you deciede to bribe jailer...'),nl,
+	write('Oh well...so now you\'re back home. What are you gonna do?'),nl,
+	retract(here(jail)),
+	asserta(here(house)),!,
+	look.
+bribe(_) :-
+	write('You got a suspicious dirty look.....'),nl.
+	
+% seduce(+Person) you're trying to seduce someone to get out of trouble.
+seduce('TA'):-
+	isHere('TA').
 
 % isHere(+Person) checks if the person the user requested
 % is in the current location.
