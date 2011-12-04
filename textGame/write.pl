@@ -72,12 +72,14 @@ drink(_):-
 	write('What a smart bartender.'),nl,
 	store_advice(toChangeXMLToTimestamp);
 	write('You can drink only at the bar'),nl).
+	
+%
 
 % look lists the things in a room, and the connections
 % assertz(here(StartLocation)) at the beginning.
 look:-
   	here(Here),
-  	respond(['You are in the ',Here]),
+  	writeSen(['You are in the ',Here]),
   	write('You can go to the following places:'),nl,
   	list_connections(Here),
   	write('You can see the following people:'),nl,
