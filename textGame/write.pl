@@ -20,7 +20,7 @@ help:-
   	tab(1),write('punch someone			(ex. punch the bartender'),nl,
   	tab(1),write('seduce someone		(ex. seduce TA'),nl,
   	tab(1),write('blackmail someone		(ex. blackmail policeman'),nl,
-  	tab(1),write('buy something			(ex. buy drink from bartender'),nl,
+  	tab(1),write('drink something		(ex. buy drink from bartender'),nl,
   	tab(1),write('bribe someone			(ex. bribe jailer)'), nl,
 	nl,
   	write('Hit any key to continue.'),nl,
@@ -49,28 +49,29 @@ bribe(jailer) :-
 	isHere(Person),
 	write('I can\'t believe you deciede to bribe jailer...'),nl,
 	write('Oh well...so now you\'re back home. What are you gonna do?'),nl,
-	retract(here(jail)),
-	asserta(here(house)),!,
-	look.
-bribe(_) :-
-	write('You got a suspicious dirty look.....'),nl.
+	go(house).
+bribe(Person) :-
+	isHere(Person),
+	writeSen(['You got a suspicious dirty look from ',Person,'...']),nl.
+bribe(_).
 	
 % seduce(+Person) you're trying to seduce someone to get out of trouble.
 seduce('TA'):-
-	isHere('TA').
+	isHere('TA'),
+	write('what a corrupted TA... he gave you an advice to tokenize input'),nl,
+	store_advice(toTokenizeInput).
+seduce(Person):-
+	isHere(Person),
+	write('You\'re not gonna get any work done tonight...'),nl.
+seduce(_).
 
-% isHere(+Person) checks if the person the user requested
-% is in the current location.
-isHere(Person) :-
-	here(Here),
-	people(Person, Here), !.
-isHere(Person) :-
-	writeSen([Person, ' is not here']),
-	fail.
-
-% writeSen(List) writes out the list into a string.
-writeSen([]) :- write('.'), nl.
-writeSen([H|T]) :- write(H), writeSen(T).
+% drink(+Bevarage): buying a bevarage buy talking to a bartender
+drink(_):-
+	( here(bar) -> write('Guess what?'),nl,
+	write('The bartender just thought you how to change the xml output line to epoch time stamp in prolog!! '), nl,
+	write('What a smart bartender.'),nl,
+	store_advice(toChangeXMLToTimestamp);
+	write('You can drink only at the bar'),nl).
 
 % look lists the things in a room, and the connections
 % assertz(here(StartLocation)) at the beginning.
