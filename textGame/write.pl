@@ -57,7 +57,9 @@ bribe(_) :-
 	
 % seduce(+Person) you're trying to seduce someone to get out of trouble.
 seduce('TA'):-
-	isHere('TA').
+	isHere('TA'),
+	write('what a corrupted TA... he gave you an advice to tokenize input'),nl,
+	asserta(advice(toTokenizeInput)).
 
 % isHere(+Person) checks if the person the user requested
 % is in the current location.
