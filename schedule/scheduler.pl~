@@ -1,0 +1,23 @@
+s(s(NP,VP)) --> np(Num, NP), vp(Num, VP).
+np(np(D,Num,N)) --> d(D), noun_with_count(Num, N).
+vp(vp(Num, V, np(D,_,N))) -- verb_with_count(Num, V).
+
+verb_with_count(plural, X) --> vs(X).
+verb_with_count(singular, X) --> v(v).
+
+noun_with_count(plural, X) --> ns(X).
+noun_with_count(singular, X) --> n(X).
+
+n('Riley').
+n('Hanna').
+n('Monday').
+ns('Mondays').
+ns(weeks).
+
+d(the).
+d(a).
+d().
+
+vs(are busy).
+v(am busy).
+v(is busy).

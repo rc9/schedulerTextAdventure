@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?><feed xmlns='http://www.w3.org/2005/Atom' xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/' xmlns:gCal='http://schemas.google.com/gCal/2005' xmlns:gd='http://schemas.google.com/g/2005'><id>http://www.google.com/calendar/feeds/robmaceachern.com_c245tet7l7t3p0crg8grk4vn3s%40group.calendar.google.com/private-228d86a556b4cc3f67d9b5ff642a2a44/basic</id><updated>2011-12-03T19:53:21.000Z</updated><category scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/g/2005#event'/><title type='text'>DemoCalendar2</title><subtitle type='text'>Demo calendar 2</subtitle><link rel='alternate' type='text/html' href='https://www.google.com/calendar/embed?src=robmaceachern.com_c245tet7l7t3p0crg8grk4vn3s@group.calendar.google.com'/><link rel='http://schemas.google.com/g/2005#feed' type='application/atom+xml' href='https://www.google.com/calendar/feeds/robmaceachern.com_c245tet7l7t3p0crg8grk4vn3s%40group.calendar.google.com/private-228d86a556b4cc3f67d9b5ff642a2a44/basic'/><link rel='http://schemas.google.com/g/2005#batch' type='application/atom+xml' href='https://www.google.com/calendar/feeds/robmaceachern.com_c245tet7l7t3p0crg8grk4vn3s%40group.calendar.google.com/private-228d86a556b4cc3f67d9b5ff642a2a44/basic/batch'/><link rel='self' type='application/atom+xml' href='https://www.google.com/calendar/feeds/robmaceachern.com_c245tet7l7t3p0crg8grk4vn3s%40group.calendar.google.com/private-228d86a556b4cc3f67d9b5ff642a2a44/basic?max-results=25'/><author><name>DemoCalendar2</name></author><generator version='1.0' uri='http://www.google.com/calendar'>Google Calendar</generator><openSearch:totalResults>5</openSearch:totalResults><openSearch:startIndex>1</openSearch:startIndex><openSearch:itemsPerPage>25</openSearch:itemsPerPage><gCal:timezone value='America/Vancouver'/><gCal:timesCleaned value='0'/><gd:where valueString='Vancouver'/><entry><id>http://www.google.com/calendar/feeds/robmaceachern.com_c245tet7l7t3p0crg8grk4vn3s%40group.calendar.google.com/private-228d86a556b4cc3f67d9b5ff642a2a44/basic/9nobnsgnsdfa9s21qr182r8020</id><published>2011-12-03T19:46:03.000Z</published><updated>2011-12-03T19:52:52.000Z</updated><category scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/g/2005#event'/><title type='html'>Grand opening</title><summary type='html'>When: Thu 15 Dec 2011 14:00 to Thu 15 Dec 2011 16:00&amp;nbsp;
+PST&lt;br&gt;
+
+
+&lt;br&gt;Event Status: confirmed</summary><content type='html'>When: Thu 15 Dec 2011 14:00 to Thu 15 Dec 2011 16:00 
+PST&lt;br /&gt;
+
+
+&lt;br /&gt;Event Status: confirmed</content><link rel='alternate' type='text/html' href='https://www.google.com/calendar/hosted/robmaceachern.com/event?eid=OW5vYm5zZ25zZGZhOXMyMXFyMTgycjgwMjAgcm9ibWFjZWFjaGVybi5jb21fYzI0NXRldDdsN3QzcDBjcmc4Z3JrNHZuM3NAZw' title='alternate'/><link rel='self' type='application/atom+xml' href='https://www.google.com/calendar/feeds/robmaceachern.com_c245tet7l7t3p0crg8grk4vn3s%40group.calendar.google.com/private-228d86a556b4cc3f67d9b5ff642a2a44/basic/9nobnsgnsdfa9s21qr182r8020'/><author><name>rob@robmaceachern.com</name><email>rob@robmaceachern.com</email></author></entry><entry><id>http://www.google.com/calendar/feeds/robmaceachern.com_c245tet7l7t3p0crg8grk4vn3s%40group.calendar.google.com/private-228d86a556b4cc3f67d9b5ff642a2a44/basic/jo9eqpn00p5jckaqrl5ra5smvs</id><published>2011-12-03T19:45:25.000Z</published><updated>2011-12-03T19:52:45.000Z</updated><category scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/g/2005#event'/><title type='html'>Lunch</title><summary type='html'>When: Wed 14 Dec 2011 14:00 to Wed 14 Dec 2011 16:00&amp;nbsp;
+PST&lt;br&gt;
+
+
+&lt;br&gt;Event Status: confirmed</summary><content type='html'>When: Wed 14 Dec 2011 14:00 to Wed 14 Dec 2011 16:00 
+PST&lt;br /&gt;
+
+
+&lt;br /&gt;Event Status: confirmed</content><link rel='alternate' type='text/html' href='https://www.google.com/calendar/hosted/robmaceachern.com/event?eid=am85ZXFwbjAwcDVqY2thcXJsNXJhNXNtdnMgcm9ibWFjZWFjaGVybi5jb21fYzI0NXRldDdsN3QzcDBjcmc4Z3JrNHZuM3NAZw' title='alternate'/><link rel='self' type='application/atom+xml' href='https://www.google.com/calendar/feeds/robmaceachern.com_c245tet7l7t3p0crg8grk4vn3s%40group.calendar.google.com/private-228d86a556b4cc3f67d9b5ff642a2a44/basic/jo9eqpn00p5jckaqrl5ra5smvs'/><author><name>rob@robmaceachern.com</name><email>rob@robmaceachern.com</email></author></entry><entry><id>http://www.google.com/calendar/feeds/robmaceachern.com_c245tet7l7t3p0crg8grk4vn3s%40group.calendar.google.com/private-228d86a556b4cc3f67d9b5ff642a2a44/basic/ijc8bl98ga1fs4tbqvrq5vtp4s</id><published>2011-12-03T19:42:17.000Z</published><updated>2011-12-03T19:51:37.000Z</updated><category scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/g/2005#event'/><title type='html'>Appointment</title><summary type='html'>When: Mon 12 Dec 2011 12:00 to 15:00&amp;nbsp;
+PST&lt;br&gt;
+
+
+&lt;br&gt;Event Status: confirmed</summary><content type='html'>When: Mon 12 Dec 2011 12:00 to 15:00 
+PST&lt;br /&gt;
+
+
+&lt;br /&gt;Event Status: confirmed</content><link rel='alternate' type='text/html' href='https://www.google.com/calendar/hosted/robmaceachern.com/event?eid=aWpjOGJsOThnYTFmczR0YnF2cnE1dnRwNHMgcm9ibWFjZWFjaGVybi5jb21fYzI0NXRldDdsN3QzcDBjcmc4Z3JrNHZuM3NAZw' title='alternate'/><link rel='self' type='application/atom+xml' href='https://www.google.com/calendar/feeds/robmaceachern.com_c245tet7l7t3p0crg8grk4vn3s%40group.calendar.google.com/private-228d86a556b4cc3f67d9b5ff642a2a44/basic/ijc8bl98ga1fs4tbqvrq5vtp4s'/><author><name>rob@robmaceachern.com</name><email>rob@robmaceachern.com</email></author></entry><entry><id>http://www.google.com/calendar/feeds/robmaceachern.com_c245tet7l7t3p0crg8grk4vn3s%40group.calendar.google.com/private-228d86a556b4cc3f67d9b5ff642a2a44/basic/vne49g47rouuddn5bj38tbccq8</id><published>2011-12-03T19:41:43.000Z</published><updated>2011-12-03T19:50:55.000Z</updated><category scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/g/2005#event'/><title type='html'>Appointment</title><summary type='html'>When: Tue 13 Dec 2011 08:00 to Tue 13 Dec 2011 16:00&amp;nbsp;
+PST&lt;br&gt;
+
+
+&lt;br&gt;Event Status: confirmed</summary><content type='html'>When: Tue 13 Dec 2011 08:00 to Tue 13 Dec 2011 16:00 
+PST&lt;br /&gt;
+
+
+&lt;br /&gt;Event Status: confirmed</content><link rel='alternate' type='text/html' href='https://www.google.com/calendar/hosted/robmaceachern.com/event?eid=dm5lNDlnNDdyb3V1ZGRuNWJqMzh0YmNjcTggcm9ibWFjZWFjaGVybi5jb21fYzI0NXRldDdsN3QzcDBjcmc4Z3JrNHZuM3NAZw' title='alternate'/><link rel='self' type='application/atom+xml' href='https://www.google.com/calendar/feeds/robmaceachern.com_c245tet7l7t3p0crg8grk4vn3s%40group.calendar.google.com/private-228d86a556b4cc3f67d9b5ff642a2a44/basic/vne49g47rouuddn5bj38tbccq8'/><author><name>rob@robmaceachern.com</name><email>rob@robmaceachern.com</email></author></entry><entry><id>http://www.google.com/calendar/feeds/robmaceachern.com_c245tet7l7t3p0crg8grk4vn3s%40group.calendar.google.com/private-228d86a556b4cc3f67d9b5ff642a2a44/basic/q7g51lfa7arpfu63lr0jnf96ds</id><published>2011-12-03T19:30:50.000Z</published><updated>2011-12-03T19:30:50.000Z</updated><category scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/g/2005#event'/><title type='html'>Board Meeting</title><summary type='html'>When: Tue 13 Dec 2011 13:00 to 15:00&amp;nbsp;
+PST&lt;br&gt;
+
+
+&lt;br&gt;Event Status: confirmed</summary><content type='html'>When: Tue 13 Dec 2011 13:00 to 15:00 
+PST&lt;br /&gt;
+
+
+&lt;br /&gt;Event Status: confirmed</content><link rel='alternate' type='text/html' href='https://www.google.com/calendar/hosted/robmaceachern.com/event?eid=cTdnNTFsZmE3YXJwZnU2M2xyMGpuZjk2ZHMgcm9ibWFjZWFjaGVybi5jb21fYzI0NXRldDdsN3QzcDBjcmc4Z3JrNHZuM3NAZw' title='alternate'/><link rel='self' type='application/atom+xml' href='https://www.google.com/calendar/feeds/robmaceachern.com_c245tet7l7t3p0crg8grk4vn3s%40group.calendar.google.com/private-228d86a556b4cc3f67d9b5ff642a2a44/basic/q7g51lfa7arpfu63lr0jnf96ds'/><author><name>rob@robmaceachern.com</name><email>rob@robmaceachern.com</email></author></entry></feed>
