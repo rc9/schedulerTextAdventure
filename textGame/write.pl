@@ -5,7 +5,7 @@ inner_play:-
 	write('Your goal as a CS student is to complete a project ans get an A+.'),nl,
 	write('However, you will encounter many obstacles'),nl,
 	write('in order to complete a project.'),nl,
-	n,
+	nl,
 	write('You can type "help" along the way if you need help on how to play'),nl,
 	write('Good Luck!'),nl,
 	look.
