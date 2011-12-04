@@ -1,6 +1,6 @@
 
 play:-
-	insert_facts, % inserts initial data to the world
+	dynamic_facts, % inserts initial data to the world
 	write('Your goal as a CS student is to complete a project ans get an A+.'),nl,
 	write('However, you will encounter many obstacles'),nl,
 	write('in order to complete a project.'),nl,
@@ -24,14 +24,14 @@ help:-
   	get0(_),
   	look.
 
-% go_to(Place) moves the player to a new location
-go_to(Place) :-
+% go(+Place) moves the player to a new location
+go(Place) :-
 	retract(here(_)),
 	asserta(here(Place)),
 	look.
-go_to(_) :- look.
+go(_) :- look.
 
-% isHere(Person) checks if the person the user requested
+% isHere(+Person) checks if the person the user requested
 % is in the current location.
 isHere(Person) :-
 	here(Here),
@@ -46,7 +46,6 @@ writeSen([H|T]) :- write(H), respond(T).
 
 % look lists the things in a room, and the connections
 % assertz(here(StartLocation)) at the beginning.
-% 
 look:-
   	here(Here),
   	respond(['You are in the ',Here]),
