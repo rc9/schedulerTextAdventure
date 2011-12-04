@@ -2,8 +2,8 @@
 :-[world].
 
 %phrase(-Predicate, -Object, +InputList, -EmptyList)
-phrase([Pred, Obj]) --> vp(SubCat, Pred), np(SubCat, Obj).
-phrase([Pred]) --> vp(intrans, Pred).
+phrase([Pred, Obj]) --> vp(SubCat, Pred), np(SubCat, Obj), !.
+phrase([Pred]) --> vp(intrans, Pred), !.
 
 %vp(-Subcategory, -Predicate, +InputList, -WithoutVerb)
 vp(location, go) --> [go];[go,to];[goto].
@@ -20,7 +20,7 @@ intrans_v(quit) --> [quit];[exit];[give,up].
 trans_p_v(seduce) --> [seduce].
 trans_p_v(blackmail) --> [blackmail].
 trans_p_v(punch) --> [punch].
-trans_p_v(cry) --> [cry,on];[cry].
+trans_p_v(cry) --> [cry,to];[cry,at];[cry].
 trans_p_v(bribe) --> [bribe].
 
 %trans_t_v(-Pred, +InputList, -WithoutVerb)
@@ -42,9 +42,12 @@ n(house) --> [house];[home].
 n(lab) --> [lab].
 %n(jail) --> [jail].
 n(policeman) --> [policeman];[popo];[po-po].
-n('TA') --> ['TA'].
-n('Kim') --> ['Kim'].
+n('TA') --> [ta];[kenny];[ben].
+n('Kim') --> [kim].
 n(jailer) --> [jailer].
+n(bartender) --> [bartender].
+n(mom) --> [mom];[mother];[ma];[mommy].
+n(brother) --> [brother];[bro].
 n('random stranger') --> [random,stranger].
 n(drink) --> [beer];[cocktail].
 n(shoulder) --> [shoulder].
