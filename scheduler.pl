@@ -9,12 +9,12 @@ getUserTest :- write('enter'), nl, read_atomics(Sen), write(Sen). %(Sen = [end],
 
 %Begin scheduler (using play since it is required by assignment).
 	
-play :- write('Welcome to your personal scheduler.  When interfacing, please do not use punctuation and ensure all input is in lowercase letters.'), nl, getInput.
+play :- write('Welcome to your personal scheduler.  When interfacing, please do not use punctuation and ensure all input is in lowercase letters.'), nl, repeat, getInput.
 
 prompt :- !, write('You can:'), nl, write('  enter a name you want to participate in the schedule (format: <name> RETURN)'), nl, write('  enter a participant\'s availability (include a name, availability, time)'''), nl, write('  get available times of a participant (end with ?)'), nl.
 
-getInput :-  repeat, prompt, read_atomics(Name),  (Name = [stop], ! ; insertName(Name), fail).
-getInput :- repeat, prompt, read_atomics(Sentence), s(Sentence,[]), write('yes').
+%getInput :- prompt, read_atomics(Name),  (Name = [stop], ! ; insertName(Name)).
+getInput :- prompt, read_atomics(Sentence), write(Sentence), nl, ((Sentence,[]), write('yes'),nl, fail; write('no'),nl, fail).
 
 insertName([X|[]]) :- !, assert(name(X)), write(X), write('  added.'), nl.
 
