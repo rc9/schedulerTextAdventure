@@ -1,4 +1,4 @@
-:- [world.pl]
+:- [world].
 
 inner_play:-
 	dynamic_facts, % inserts initial data to the world
