@@ -40,9 +40,9 @@ where :- findall(X,here(X),Z), write(Z), nl.
 % punch(+Person) punches someone in the location
 % and results in a policeman to put you in a jail.
 punch(Person) :-
-	not(here(jail)), isHere(Person),
+	(here(jail) -> write('You can\'t punch anyone while you are in jail.'),nl; isHere(Person),
 	write('Uhoh you are in trouble now... The policeman dragged you off to jail.'), nl,
-	go(jail).
+	go(jail)).
 punch(_).
 
 % bribe(+Person) you\'re trying to bribe someone to get easy shortcut.
