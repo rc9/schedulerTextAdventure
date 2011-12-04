@@ -38,7 +38,7 @@ go(_) :- look.
 % and results in a policeman to put you in a jail.
 punch(Person) :-
 	isHere(Person),
-	write('Ohoh someone called a policeman. He\'s taking you to a jail...'), nl,
+	write('Ohoh you are in trouble... The policeman dragged you off to jail.'), nl,
 	retract(here(_)),
 	asserta(here(jail)),
 	look.
@@ -52,7 +52,7 @@ bribe(jailer) :-
 	go(house).
 bribe(Person) :-
 	isHere(Person),
-	writeSen(['You got a suspicious dirty look from ',Person,'...']),nl.
+	writeSen(['You got a suspicious dirty look from ',Person,'...']).
 bribe(_).
 	
 % seduce(+Person) you're trying to seduce someone to get out of trouble.
@@ -64,6 +64,17 @@ seduce(Person):-
 	isHere(Person),
 	write('You\'re not gonna get any work done tonight...'),nl.
 seduce(_).
+
+%cryTo(+Person) You\'re about to cry on someone's shoulder..
+cryTo(jailer):-
+	isHere(jailer),
+	write('You cried to jailer and with pity he advices you to swtich your project.'), nl,
+	store_advice(toSwitchProject).
+cryTo(Person) :-
+	isHere(Person),
+	writeSen(['Awwwww ',Person, ' let you borrow his/her shoulder.']),
+	write('You are comforted'),nl.
+cryTo(_).
 
 % drink(+Bevarage): buying a bevarage buy talking to a bartender
 drink(_):-
@@ -77,7 +88,7 @@ drink(_):-
 % assertz(here(StartLocation)) at the beginning.
 look:-
   	here(Here),
-  	writeSen(['You are in the ',Here]),
+  	writeSen(['You are at the ',Here]),
   	write('You can see the following people:'),nl,
   	list_peopleAt(Here),
   	write('You can go to the following places:'),nl,
@@ -94,7 +105,7 @@ list_connections(Place):-
   	tab(2),write(X),nl,
   	fail.
 list_connections(jail):-
-	write('You have no where to go. Wait until policeman lets you out.'),nl.
+	tab(2), write('You have no where to go. Wait until policeman lets you out.'),nl.
 list_connections(_).
 
 connect(X,Y):- path(X,Y).
