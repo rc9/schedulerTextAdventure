@@ -2,7 +2,6 @@ place(house).
 place(bar).
 place(lab).
 place(jail).
-place(library).
 
 at(mom, house).
 at(brother, house).
@@ -10,9 +9,7 @@ at(bartender, bar).
 at(policeman, bar).
 at(ta, lab).
 at(jailer, jail).
-at(prisoner, jail). %a random prisoner also in jail
-at(kim, library).
-at(librarian, library).
+at(kim, lab).
 
 person(mom).
 person(brother).
@@ -20,12 +17,10 @@ person(bartender).
 person(policeman).
 person(ta).
 person(jailer).
-person(prisoner).
 person(kim).
-person(librarian).
 
 action(blackmail, lab).
-action(blackmail, library).
+action(blackmail, bar).
 action(code, house).
 action(cry, _).
 action(drink, bar).
