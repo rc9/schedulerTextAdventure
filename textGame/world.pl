@@ -54,7 +54,8 @@ blackmail('Kim') :-
 	writeSen(['You are about to blackmail ', 'Kim']),
 	Advice='Madness takes its toll. Please have exact change.', % http://www.mtholyoke.edu/~emdurso/amusing.html
 	store_advice(toImportXML),
-	writeSen(['Kim has given you some great advice: ', Advice]). 
+	writeSen(['Kim has given you some great advice: ', Advice]),
+	writeSen(['This advice has given you some insight into importing XML files! Sweet!']).
 	
 % fall through in case blackmailing fails
 blackmail(Person) :-
