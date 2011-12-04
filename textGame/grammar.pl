@@ -1,6 +1,6 @@
 %%%%GRAMMAR%%%%%
 
-:-[tokenizer].
+:-[world].
 
 %phrase(-Predicate, -Object, +InputList, -EmptyList)
 phrase(Pred, Obj) --> vp(SubCat, Pred), np(SubCat, Obj).
@@ -12,15 +12,16 @@ vp(trans_p, Pred) --> trans_p_v(Pred).
 vp(trans_t, Pred) --> trans_t_v(Pred).
 
 %intrans_v(-Predicate, +InputList, -WithoutVerb)
-intrans_v('write code') --> [write,code];[write,some,code].
-intrans_v(help_me) --> [help];[h].
-intrans_v(quit_me) --> [quit];[exit];[give,up].
+intrans_v(write_code) --> [write,code];[write,some,code].
+intrans_v(help) --> [help];[h].
+intrans_v(quit) --> [quit];[exit];[give,up].
 
 %trans_p_v(-Pred, +InputList, -WithoutVerb)
 trans_p_v(seduce) --> [seduce].
 trans_p_v(blackmail) --> [blackmail].
 trans_p_v(punch) --> [punch].
-trans_p_v('cry on') --> [cry,on];[cry].
+trans_p_v(cry) --> [cry,on];[cry].
+trans_p_v(bribe) --> [bribe].
 
 %trans_t_v(-Pred, +InputList, -WithoutVerb)
 trans_t_v(drink) --> [drink].
@@ -40,7 +41,7 @@ n(bar) --> [bar].
 n(home) --> [home].
 n(lab) --> [lab].
 %n(jail) --> [jail].
-n(policeman) --> [policeman];[popo].
+n(policeman) --> [policeman];[popo];[po-po].
 n('TA') --> ['TA'].
 n('Kim') --> ['Kim'].
 n(jailer) --> [jailer].
