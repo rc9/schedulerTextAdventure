@@ -24,6 +24,14 @@ person(prisoner).
 person(kim).
 person(librarian).
 
+action(blackmail, lab).
+action(blackmail, library).
+action(code, house).
+action(cry, _).
+action(drink, bar).
+action(punch, _).
+action(seduce, _). %seduction can happen anywhere ;)
+
 dynamic_facts:-
 	assertz(here(house)).
 
