@@ -20,7 +20,7 @@ help:-
   	tab(1),write('punch someone			(ex. punch the bartender'),nl,
   	tab(1),write('seduce someone		(ex. seduce TA'),nl,
   	tab(1),write('blackmail someone		(ex. blackmail policeman'),nl,
-  	tab(1),write('buy something			(ex. buy drink from bartender'),nl,
+  	tab(1),write('drink something		(ex. buy drink from bartender'),nl,
   	tab(1),write('bribe someone			(ex. bribe jailer)'), nl,
 	nl,
   	write('Hit any key to continue.'),nl,
@@ -52,14 +52,29 @@ bribe(jailer) :-
 	retract(here(jail)),
 	asserta(here(house)),!,
 	look.
-bribe(_) :-
-	write('You got a suspicious dirty look.....'),nl.
+bribe(Person) :-
+	isHere(Person),
+	writeSen(['You got a suspicious dirty look from ',Person,'...'),nl.
+bribe(_).
 	
 % seduce(+Person) you're trying to seduce someone to get out of trouble.
 seduce('TA'):-
 	isHere('TA'),
 	write('what a corrupted TA... he gave you an advice to tokenize input'),nl,
 	asserta(advice(toTokenizeInput)).
+seduce(Person):-
+	isHere(Person),
+	write('You\'re not gonna get any work done tonight...'),nl.
+seduce(_).
+
+% drink(+Bevarage): buying a bevarage buy talking to a bartender
+drink(_):-
+	( here(bar) -> write('Guess what?'),nl,
+	write('The bartender just thought you how to change the xml output line to epoch time stamp in prolog!! '), nl,
+	write('What a smart bartender.'),nl,
+	asserta(advice(toChangeXMLToTimestamp));
+	write('You can drink only at the bar'),nl).
+	
 
 % isHere(+Person) checks if the person the user requested
 % is in the current location.
