@@ -85,16 +85,49 @@ drink(_):-
 	write('What a smart bartender.'),nl,
 	store_advice(toChangeXMLToTimestamp);
 	write('You can drink only at the bar'),nl).
+	
+% pickUp(+Object) picking up an object
+pickUp(Object):-
+	isObjectHere(Object), 
+	retract(things(Object,_)),
+	asserta(possession(Object)), !,
+	writeSen(['You picked up ', Object]).
+pickUp(_).
+
+drop(Object):-
+	here(Here),
+	possession(Object),
+	retract(possession(Object)),
+	asserta(things(Object,Here)), !,
+	writeSen(['You dropped ',Object,'at the ', Here]).
+drop(_).
+	
+% isObjectHere(+Object) checks if the object the user requested
+% is in the current location.
+isObjectHere(Object) :-
+	here(Here),
+	things(Object, Here), !.
+isObjectHere(Object) :-
+	writeSen([Object, ' is not here']),
+	fail.
 
 % look lists the things in a room, and the connections
 % assertz(here(StartLocation)) at the beginning.
 look:-
   	here(Here),
   	writeSen(['You are at the ',Here]),
+  	write('You see the following objects:'), nl,
+  	list_things(Here),
   	write('You can see the following people:'),nl,
   	list_peopleAt(Here),
   	write('You can go to the following places:'),nl,
   	list_connections(Here).
+
+list_things(Place) :-
+	things(X,Place),
+	tab(2), write(X), nl,
+	fail.
+list_things(_).
 
 list_peopleAt(Place):-
   	at(X,Place),
@@ -110,6 +143,23 @@ list_connections(jail):-
 	tab(2), write('You have no where to go. Try talking to some people.'),nl.
 list_connections(_).
 
+knowledge:-
+	write('You currently know how to:'), nl,
+  	list_knowledge(_).
+  	
+list_knowledge(_):-
+	advice(X), tab(2), write(X), nl, fail.
+list_knowledge(_).
+
+inventory:-
+	write('You currently have:'), nl,
+	list_possession(_).
+
+list_possession(_):-
+	possession(X), tab(2), write(X), nl, fail.
+list_possession(_).
+	
+	
 connect(X,Y):- path(X,Y).
 connect(X,Y):- path(Y,X).
 
