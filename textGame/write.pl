@@ -34,20 +34,21 @@ go(Place) :-
 	look.
 go(_) :- look.
 
+% where
+where :- findall(X,here(X),Z).  
+
 % punch(+Person) punches someone in the location
 % and results in a policeman to put you in a jail.
 punch(Person) :-
-	isHere(Person),
+	not(here(jail)), isHere(Person),
 	write('Uhoh you are in trouble now... The policeman dragged you off to jail.'), nl,
-	retract(here(_)),
-	asserta(here(jail)),
-	look.
+	go(jail).
 punch(_).
 
 % bribe(+Person) you\'re trying to bribe someone to get easy shortcut.
 bribe(jailer) :-
 	isHere(jailer),
-	write('I can\'t believe you deciede to bribe the jailer...'),nl,
+	write('I can\'t believe you decided to bribe the jailer...'),nl,
 	write('Oh well...so now you\'re back home. What are you gonna do?'),nl,
 	go(house).
 bribe(Person) :-
