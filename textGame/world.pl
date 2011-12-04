@@ -68,9 +68,9 @@ write_code :-
 	advice(toTokenizeInput),
 	advice(toChangeXMLToTimestamp),
 	advice(toSwitchProject),
-	writeSen('OMFG you have all the pieces to the puzzle! The answer was right infront of your face the entire time!'),
-	writeSen('All you had to do was make a mediocre text adventure game! Who knew???'),
-	writeSen('So much easier! Prolog for the win!'),
+	writeSen(['OMFG you have all the pieces to the puzzle! The answer was right infront of your face the entire time!']),
+	writeSen(['All you had to do was make a mediocre text adventure game! Who knew???']),
+	writeSen(['So much easier! Prolog for the win!']),
 	retract(gameover(_)),
 	asserta(gameover(win)).
 
