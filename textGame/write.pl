@@ -62,12 +62,17 @@ bribe(_).
 	
 % seduce(+Person) you're trying to seduce someone to get out of trouble.
 seduce('TA'):-
+	use(flowers),
 	isHere('TA'),
 	write('what a corrupted TA... he gave you advice about how to tokenize input'),nl,
 	store_advice(toTokenizeInput).
-seduce(Person):-
+seduce(Person):- 
+	use(flowers),
 	isHere(Person),
 	write('You\'re not gonna get any work done tonight...'),nl.
+seduce(Person) :-
+	isHere(Person),
+	writeSen('You just got shutdown! Maybe you should look for something to help you with this...').
 seduce(_).
 
 %cry(+Person) You\'re about to cry on someone's shoulder..

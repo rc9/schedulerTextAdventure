@@ -32,7 +32,7 @@ trans_p_v(bribe) --> [bribe].
 %trans_t_v(-Pred, +InputList, -WithoutVerb)
 trans_t_v(drink) --> [drink].
 trans_t_v(drop) --> [drop];[leave];[abandon].
-trans_t_v(pickUp) --> [pick up];[take];[pick];[grab].
+trans_t_v(pickUp) --> [pick,up];[take];[pick];[grab].
 
 %% Nouns %%
 %Noun phrase choses to use a determiner or not
@@ -71,6 +71,7 @@ n('text adventure game') --> [text,adventure,game];[text,game];[game].
 n(iphone) --> [iphone];[phone].
 n(money) --> [money];[cash];[dough];[moolah].
 n(fakeId) --> [fake,id];[id].
+n(flowers) --> [flowers].
 
 
 %% Prepositions %%

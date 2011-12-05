@@ -35,6 +35,7 @@ dynamic_facts:-
 	assertz(things(money, house)),
 	assertz(things(iphone, bar)),
 	assertz(things(fakeId, lab)),
+	assertz(things(flowers, house)),
 	assertz(possession(_) :- fail).
 
 %----actions-------
