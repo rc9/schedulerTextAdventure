@@ -3,6 +3,7 @@
 
 %phrase(-Predicate, -Object, +InputList, -EmptyList)
 phrase([Pred, Patient, Obj]) --> vp(SubCat, Pred), np(SubCat, Patient), pp(Obj).
+phrase([Pred, Patient]) --> vp(SubCat, Pred), np(SubCat, Patient).
 phrase([Pred]) --> vp(intrans, Pred).
 
 %% Verbs %%
@@ -32,7 +33,7 @@ trans_p_v(bribe) --> [bribe].
 %trans_t_v(-Pred, +InputList, -WithoutVerb)
 trans_t_v(drink) --> [drink].
 trans_t_v(drop) --> [drop];[leave];[abandon].
-trans_t_v(pickUp) --> [pick up];[take];[pick];[grab].
+trans_t_v(pickUp) --> [pick,up];[take];[pick];[grab].
 
 %% Nouns %%
 %Noun phrase choses to use a determiner or not
