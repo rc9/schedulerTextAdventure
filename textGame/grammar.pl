@@ -31,12 +31,8 @@ trans_p_v(bribe) --> [bribe].
 %Transitive verbs for objects
 %trans_t_v(-Pred, +InputList, -WithoutVerb)
 trans_t_v(drink) --> [drink].
-<<<<<<< HEAD
 trans_t_v(drop) --> [drop];[leave];[abandon].
-trans_t_v(pickUp) --> [pick up];[take];[pick].
-=======
-trans_t_v(pickUp) --> [pick,up];[grab];[take].
->>>>>>> origin/master
+trans_t_v(pickUp) --> [pick up];[take];[pick];[grab].
 
 %% Nouns %%
 %Noun phrase choses to use a determiner or not
