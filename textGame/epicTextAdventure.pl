@@ -1,5 +1,13 @@
 %%%% TEXT ADVENTURE FILE %%%%
 
+/** Authors:
+*
+*	Riley Chang	41805086	l1v6
+*	Rob MacEachern
+*	Hanna Yoo
+*/
+
+
 :-[tokenizer].
 :-[grammar].
 
