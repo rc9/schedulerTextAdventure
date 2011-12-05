@@ -25,6 +25,7 @@ trans_p_v(bribe) --> [bribe].
 
 %trans_t_v(-Pred, +InputList, -WithoutVerb)
 trans_t_v(drink) --> [drink].
+trans_t_v(pickUp) --> [pick,up];[grab];[take].
 
 
 %np(-Subcategory, -Object, +InputList, -WithoutNoun)
@@ -53,6 +54,9 @@ n(drink) --> [beer];[cocktail].
 n(shoulder) --> [shoulder].
 n(scheduler) --> [scheduler,game];[scheduler].
 n('text adventure game') --> [text,adventure,game];[text,game];[game].
+n(iphone) --> [iphone];[phone].
+n(money) --> [money];[cash];[dough];[moolah].
+n(fakeId) --> [fake,id];[id].
 
 %d(+InputList, -WithoutDeterminer)
 d --> [the];[a].

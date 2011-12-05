@@ -27,12 +27,15 @@ action(drink, bar).
 action(punch, _).
 action(seduce, _). %seduction can happen anywhere ;)
 
-
 % this needs to run at the start of the program
 dynamic_facts:-
 	assertz(here(house)),
 	assertz(advice(base)), % you are given base advice to start (it helps queries to have the predict always exist)
-	assertz(gameover(no)).
+	assertz(gameover(no)),
+	assertz(things(money, house)),
+	assertz(things(iphone, bar)),
+	assertz(things(fakeId, lab)),
+	assertz(possession(_) :- fail).
 
 %----actions-------
 
@@ -52,6 +55,7 @@ store_advice(Advice) :-
 blackmail('Kim') :-
 	%TODO add humor and wit
 	isHere('Kim'),
+	use(iphone),
 	writeSen(['You are about to blackmail ', 'Kim']),
 	Advice='Madness takes its toll. Please have exact change.', % http://www.mtholyoke.edu/~emdurso/amusing.html
 	store_advice(toImportXML),
@@ -60,7 +64,7 @@ blackmail('Kim') :-
 	
 % fall through in case blackmailing fails
 blackmail(Person) :-
-	writeSen(['You can\'t blackmail ', Person]).
+	writeSen(['You can\'t blackmail ', Person, '. You don\'t have any dirt to blackmail with!']).
 
 % the case where you have all the advice you need
 write_code :-
@@ -91,3 +95,12 @@ isHere(Person) :-
 isHere(Person) :-
 	writeSen([Person, ' is not here']),
 	fail.
+
+% use(+Thing)
+% uses an item
+use(Thing) :- 
+	possession(Thing),
+	here(Here),
+	retract(possession(Thing)),
+	writeSen(['You used the ', Thing, ' at the ', Here, '. I hope you know what you\'re doing...']).
+	
