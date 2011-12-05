@@ -2,7 +2,7 @@
 
 :-[world].
 
-%phrase(-Predicate, -Object, +InputList, -EmptyList)
+%phrase(-Predicate,+InputList, -EmptyList)
 phrase([Pred, Patient, Obj]) --> vp(SubCat, Pred), np(SubCat, Patient), pp(Obj).
 phrase([Pred, Patient]) --> vp(SubCat, Pred), np(SubCat, Patient).
 phrase([Pred]) --> vp(intrans, Pred).
@@ -55,7 +55,6 @@ n_bar(location, Place) --> n(Place), {place(Place)}.
 n(bar) --> [bar].
 n(house) --> [house];[home].
 n(lab) --> [lab].
-n(jail) --> [jail].
 
 %Nouns of persons
 n(policeman) --> [policeman];[popo];[po-po].
@@ -65,23 +64,23 @@ n(jailer) --> [jailer].
 n(bartender) --> [bartender].
 n(mom) --> [mom];[mother];[ma];[mommy].
 n(brother) --> [brother];[bro].
-n('random stranger') --> [random,stranger];[random].
+n(prisoner) --> [prisoner];[stranger];[random].
 
 %Nouns of objects
 n(drink) --> [beer];[soda];[pop];[cocktail];[tequila].
-n('iPhone') --> [iphone];[phone].
+n(iPhone) --> [iphone];[phone].
 n(money) --> [money];[cash];[dough];[moolah].
 n('fake ID') --> [fake,id];[id];[fake].
-n(flowers) --> [flowers].
+n(flowers) --> [flowers];[flower].
 
 
 %% Prepositions %%
 %pp(-Object, +InputList, -WithoutPrepositionPhrase)
-pp(Obj) --> p, np(Obj).
+pp(Obj) --> p, np(trans_t,Obj).
 
 %(+InputList, WithoutPreposition).
-p --> [with];[in];[at].
+p --> [with];[using];[in];[at].
 
 %Determiner that may appear with a noun
 %d(+InputList, -WithoutDeterminer)
-d --> [the];[a];[some].
+d --> [the];[a];[some];[my].

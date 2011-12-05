@@ -11,8 +11,9 @@ at(brother, house).
 at(bartender, bar).
 at(policeman, bar).
 at('TA', lab).
-at(jailer, jail).
 at('Kim', lab).
+at(jailer, jail).
+at(prisoner, jail).
 
 person(mom).
 person(brother).
@@ -21,10 +22,10 @@ person(policeman).
 person('TA').
 person(jailer).
 person('Kim').
-person('random stranger').
+person(prisoner).
 
 thing(money).
-thing('iPhone').
+thing(iPhone).
 thing('fake ID').
 thing(drink).
 thing(flowers).
@@ -53,18 +54,12 @@ dynamic_facts:-
 %	assertz(advice('nothing else')), % you are given base advice to start (it helps queries to have the predict always exist)
 	assertz(gameover(no)),
 	assertz(things(money, house)),
-	assertz(things('iPhone', bar)),
+	assertz(things(iPhone, bar)),
 	assertz(things('fake ID', lab)),
-	assertz(things(flowers, house)).
+	assertz(things(flowers, house)),
+    assertz(prisonerhasmoney).
 
 %% Actions %%
-
-% goto(+Place)
-% moves your character to Place 
-% and updates KB
-goto(Place) :-
-	retract(here(_)),
-	asserta(here(Place)).
 	
 % store_advice(+Advice)
 % stores a piece of advice in the KB
@@ -93,7 +88,16 @@ use(Thing) :-
 	here(Here),
 	retract(possession(Thing)),
 	writeSen(['You used the ', Thing, ' at the ', Here, '. I hope you know what you\'re doing...']).
-	
+
+% go(+Place, +Object)
+%
+go(Place, Object):-
+    possession(Object), go(Place).
+go(Place, Object) :-
+    writeSen(['You don\'t have ', Object, ' but you are still going.']), 
+    go(Place).
+
+
 % go(+Place)
 % moves the player to a new location
 go(Place) :-
@@ -101,18 +105,37 @@ go(Place) :-
 	retract(here(_)),
 	asserta(here(Place)),!,
 	look).
+go(_).
 
 % where
 % print current location
 where :- look.
+% punch(+Person, +Object) 
+% using an object for action punch is not necessary.
+punch(Person,Object) :- 
+writeSen(['You don\'t need to use ', Object, ' to punch...']), punch(Person).
 
 % punch(+Person)
-% punches someone in the location and results in a policeman putting you in jail
+% punch the stranger in jail to get his money
+punch(prisoner) :-
+here(jail), !, ( prisonerhasmoney -> 
+    write('You just stole all your cell mate\'s money. Maybe you deserve to be in jail...'),nl, 
+    assertz(possession(money)), retract(prisonerhasmoney); 
+    write('You already took the poor prisoner\'s money! Leave him alone!'),nl).
+
+% punched someone in the location and results in a policeman putting you in jail
 punch(Person) :-
-	(here(jail) -> write('You\'re locked in jail! How can you punch anyone?.'),nl; isHere(Person),
+	(here(jail) -> write('You\'re locked in jail! How can you punch but prisoners?.'),nl; isHere(Person),
 	write('Uhoh you\'re in trouble now... The policeman dragged you off to jail.'), nl,
+    write('There\'s a bored jailer ensuring you can\'t escape. '),
+    write('Your instincts tell you he might be sympathetic to your plight...'),nl,
 	go(jail)).
 punch(_).
+
+% bribe(+Person, +Object)
+% check if the object passed in is money
+bribe(Person, money) :- bribe(Person).
+bribe(_,Object) :- writeSen(['You can\'t bribe with ', Object]).
 
 % bribe(+Person)
 % try to bribe someone to get an easy shortcut
@@ -121,7 +144,8 @@ bribe(jailer) :-
 	( use(money) ->
 	write('I can\'t believe you decided to bribe the jailer...'),nl,
 	write('Oh well...so now you\'re back home. What are you gonna do?'),nl,
-	go(house); write('You have no money! Looks like you\'ll be in jail for a while.')
+    retract(here(_)),asserta(here(house)),!,look; 
+    write('You have no money! And now the jailer will never let you out. Looks like you\'ll be in jail for a while.')
 	,nl, write('...'), nl,
 	write('Finally your mom came and rescued you. She does NOT look happy.'),nl,
 	write('On top of all that you missed the project deadline!'), nl,
@@ -133,8 +157,13 @@ bribe(Person) :-
 	writeSen(['You got a suspicious dirty look from ',Person,'...']).
 bribe(Person) :-
 	isHere(Person),
-	write('Your bribe attempt was unsuccessful...what did you offer?').
+	write('Your bribe attempt was unsuccessful...do you even have what you\'re offerring?'),nl.
 bribe(_).
+
+% seduce(+Person, +Object) 
+% check if the object passed in is a flower
+seduce(Person, flowers) :- seduce(Person).
+seduce(_,Object) :- writeSen(['You can\'t seduce with ', Object]).
 	      
 % seduce(+Person)
 % try to seduce someone to get out of trouble
@@ -142,15 +171,20 @@ seduce('TA'):-
 	isHere('TA'),
 	use(flowers),
 	write('what a corrupted TA... he gave you advice about how to tokenize input'),nl,
-	store_advice(toTokenizeInput).
+	store_advice('tokenize user input').
 seduce(Person):- 
 	isHere(Person),
 	use(flowers),
 	write('You\'re not gonna get any work done tonight...'),nl.
 seduce(Person) :-
 	isHere(Person),
-	write('You just got shutdown! Maybe you should look for something to help you with this...').
+	write('You just got shutdown! Maybe you should look for something to help you with this...'), nl.
 seduce(_).
+
+% cry(+Person, +Object) 
+% using an object for action cry is not necessary.
+cry(Person,Object) :- 
+    writeSen(['You don\'t need to use ', Object, ' to cry...']), cry(Person).
 
 % cry(+Person)
 % cry on someone's shoulder
@@ -158,7 +192,7 @@ cry(jailer):-
 	isHere(jailer),
 	write('You cried to the jailer and with pity he advises you to swtich your project.'), nl,
 	write('Hm...The jailer doesn\'t seem to enjoy his job. Maybe he\'ll take a bribe.'), nl,
-	store_advice(toSwitchProject).
+	store_advice('switch a project').
 cry(Person) :-
 	Person \= jailer,
 	isHere(Person),
@@ -166,32 +200,41 @@ cry(Person) :-
 	write('You are comforted'),nl.
 cry(_).
 
+% drink(+Person, +Object) 
+% check if the object passed in is the ID
+drink(Person, 'fake ID') :- drink(Person).
+drink(_,Object) :- writeSen(['You can\'t drink with ', Object]).
+
 % drink(+Bevarage):
 % buy a bevarage by talking to a bartender
-drink(Beverage):-
+drink(drink):-
 	( here(bar) -> use('fake ID'), write('Guess what?'),nl,
 	write('The bartender just taught you how to change the xml output line to an epoch timestamp in prolog!'), nl,
 	write('What a smart bartender.'),nl,
-	writeSen(['Plus he served you ', Beverage]),
-	store_advice(toChangeXMLToTimestamp);
+	write('He also realized you used a fake ID, so he took it. Better not try that again...'),nl,
+	store_advice('change XML info to prolog timestamp');
 	write('You can only drink at the bar'),nl).
-drink(Beverage) :-
-	writeSen(['The bartender needs to see some id before you can have your ', Beverage]).
+drink(drink) :-
+	writeSen(['The bartender needs to see some id before you can have your drink']).
+drink(Object) :- 
+    writeSen(['You can\'t drink the ', Object]).
+
+% blackmail(+Person, +Object) 
+% check if the object passed in is a iPhone
+blackmail(Person, iPhone) :- blackmail(Person).
+blackmail(_,Object) :- writeSen(['You can\'t blackmail with ', Object]).
 
 % blackmail(+Person)
 % attempt to blackmail someone to get what you need
 blackmail('Kim') :-
 	isHere('Kim'),
-	% TODO: what is this Advice??
-%	Advice='Madness takes its toll. Please have exact change.', % http://www.mtholyoke.edu/~emdurso/amusing.html
-	( store_advice(toImportXML) ->
+	( store_advice('import XML file in prolog') ->
 	  %then
-	use('iPhone'),
+	use(iPhone),
 	write('Kim is so grateful you found her iPhone.'),nl,
 	write('But what?! You think she\'ll succumb to embarrassing photos?'), nl,
 	write('HA! She instantly sends them to the cloud, no shame in her eyes.'), nl,
 	write('But because she is so awesome and knows how much you are struggling with this extra difficult problem she decides to give you some advice so long as you never blackmail her again.'),nl,
-	%TODO:? writeSen(['Kim has given you some great advice: ', Advice]),
 	writeSen(['This advice has given you some insight into importing XML files! Sweet!']);
 	  %else
 	write('You disappointed Kim.  Trying to blackmail her again, honestly...'),nl,
@@ -202,15 +245,18 @@ blackmail(Person) :-
 	isHere(Person),
 	writeSen(['You can\'t blackmail ', Person, '. You don\'t have any dirt to blackmail with!']).
 
+% you can't write code while in jail or the bar
+write_code:-
+    (here(jail);here(bar)), write('You can\'t write code here!'), nl.
+
 % the case where you have all the advice you need
 write_code :-
-	(here(home);here(lab)),
-	advice(toImportXML),
-	advice(toTokenizeInput),
-	advice(toChangeXMLToTimestamp),
-	advice(toSwitchProject),
+	advice('import XML file in prolog'),
+	advice('tokenize user input'),
+	advice('change XML info to prolog timestamp'),
+	advice('switch a project'),
 	writeSen(['OMFG you have all the pieces to the puzzle! The answer was right infront of your face the entire time!']),
-	writeSen(['All you had to do was make a mediocre text adventure game! Who knew???']),
+	writeSen(['All you had to do was make a amazing text adventure game! Who knew???']),
 	writeSen(['So much easier! Prolog for the win!']),
 	retract(gameover(_)),
 	assert(gameover(win)).
@@ -221,8 +267,8 @@ write_code :-
 
 % pickUp(+Object)
 % pick up an object
-pickUp('iPhone') :-
-	add_if_here('iPhone'),
+pickUp(iPhone) :-
+	add_if_here(iPhone),
 	writeSen(['You pick up the iPhone and take a peek at the contents. Oh my, there are pictures of Kim on here! Very embarassing pictures... Hmmmm. This might come in handy..']).
 pickUp(money) :-
 	add_if_here(money),
@@ -231,7 +277,7 @@ pickUp('fake ID') :-
 	add_if_here('fake ID'),
 	writeSen(['Alright a fake ID! Go get \'em McLovin...']).
 pickUp(Object):-
-	Object \= money, Object \= 'fake ID',
+	Object \= money, Object \= 'fake ID', Object \= iPhone,
 	isObjectHere(Object), 
 	retract(things(Object,_)),
 	asserta(possession(Object)), !,
@@ -251,7 +297,7 @@ drop(Object):-
 	possession(Object),
 	retract(possession(Object)),
 	asserta(things(Object,Here)), !,
-	writeSen(['You left the ',Object,'at the ', Here]).
+	writeSen(['You left the ',Object,' at the ', Here]).
 drop(_) :- write('You can\'t drop what you don\'t have.'),nl.
 	
 % isObjectHere(+Object) checks if the object the user requested
@@ -260,6 +306,7 @@ isObjectHere(Object) :-
 	here(Here),
 	things(Object, Here), !.
 isObjectHere(Object) :- writeSen(['No ', Object, ' to be found here']), fail.
+
 % look lists the things in a room, and the connections
 % assertz(here(StartLocation)) at the beginning.
 look:-
@@ -295,12 +342,12 @@ list_connections(Place):-
   	tab(3),write(X),nl,
   	fail.
 list_connections(jail):-
-	tab(2), write('You have no where to go. Try talking to some people.'),nl.
+	tab(2), write('You have no where to go. Try interacting with someone.'),nl.
 list_connections(_).
 
 % get your knowledge (advice acquired)
 knowledge:-
-	write('You currently know:'), nl,
+	write('You currently know how to:'), nl,
   	list_knowledge.
 
 % helper method to print out all knowledge
