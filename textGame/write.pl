@@ -1,5 +1,6 @@
 :- [world].
 
+% sets up the game world and prints out some instructions
 inner_play:-
 	dynamic_facts, % inserts initial data to the world
 	write('Your goal as a CS student is to complete a Prolog project and get an A+.'),nl,
@@ -10,185 +11,24 @@ inner_play:-
 	write('Good Luck!'),nl,
 	look.
 
+% displays possible commands
 help:-	
-	write('Commands you can use the following to play the game:'),nl,
-  	nl,
-  	tab(2),write('go to a place         (ex. go to the lab)'),nl,
+	write('Commands you can use the following to play the game:'),nl,nl,
+  	tab(2),write('go to a place		(ex. go to the lab)'),nl,
   	tab(2),write('choose a project		(ex. choose schedular)'),nl,
-  	tab(2),write('write code			(ex. write code'),nl,
+  	tab(2),write('write code		(ex. write code'),nl,
   	tab(2),write('cry to someone		(ex. cry to Kim'),nl,
-  	tab(2),write('punch someone			(ex. punch the bartender'),nl,
+  	tab(2),write('punch someone		(ex. punch the bartender'),nl,
   	tab(2),write('seduce someone		(ex. seduce the TA'),nl,
   	tab(2),write('blackmail someone		(ex. blackmail the policeman'),nl,
   	tab(2),write('drink something		(ex. drink some beer'),nl,
-  	tab(2),write('bribe someone			(ex. bribe the jailer)'), nl,
+  	tab(2),write('bribe someone		(ex. bribe the jailer)'), nl,
+	tab(2),write('pick up something		(ex. pick up the phone)'), nl,
+	tab(2),write('drop something		(ex. drop the money)'), nl,
+	tab(2),write('inventory			displays all items you have'), nl,
+	tab(2),write('knowledge			displays all advice you collected'), nl,
+	tab(2),write('where			relists your location and options'), nl,
 	nl,
   	write('Hit any key to continue.'),nl,
   	get0(_),
   	look.
-
-% go(+Place) moves the player to a new location
-go(Place) :-
-	retract(here(_)),
-	asserta(here(Place)),!,
-	look.
-go(_) :- look.
-
-% where
-where :- findall(X,here(X),Z), write(Z), nl.
-
-% punch(+Person) punches someone in the location
-% and results in a policeman to put you in a jail.
-punch(Person) :-
-	(here(jail) -> write('You can\'t punch anyone while you are in jail.'),nl; isHere(Person),
-	write('Uhoh you are in trouble now... The policeman dragged you off to jail.'), nl,
-	go(jail)).
-punch(_).
-
-% bribe(+Person) you're trying to bribe someone to get easy shortcut.
-bribe(jailer) :-
-	use(money),
-	isHere(jailer),
-	write('I can\'t believe you decided to bribe the jailer...'),nl,
-	write('Oh well...so now you\'re back home. What are you gonna do?'),nl,
-	go(house).
-bribe(Person) :-
-	use(money),
-	isHere(Person),
-	writeSen(['You got a suspicious dirty look from ',Person,'...']).
-bribe(_) :-
-	writeSen(['Your bribe attempt was unsuccessful...']).
-bribe(_).
-	
-% seduce(+Person) you're trying to seduce someone to get out of trouble.
-seduce('TA'):-
-	use(flowers),
-	isHere('TA'),
-	write('what a corrupted TA... he gave you advice about how to tokenize input'),nl,
-	store_advice(toTokenizeInput).
-seduce(Person):- 
-	use(flowers),
-	isHere(Person),
-	write('You\'re not gonna get any work done tonight...'),nl.
-seduce(Person) :-
-	isHere(Person),
-	writeSen('You just got shutdown! Maybe you should look for something to help you with this...').
-seduce(_).
-
-%cry(+Person) You\'re about to cry on someone's shoulder..
-cry(jailer):-
-	isHere(jailer),
-	write('You cried to the jailer and with pity he advises you to swtich your project.'), nl,
-	write('Hm...The jailer doesn\'t seem to enjoy his job. Maybe he\'ll take a bribe.'), nl,
-	store_advice(toSwitchProject).
-cry(Person) :-
-	isHere(Person),
-	writeSen(['Awwwww ',Person, ' let you borrow a shoulder to cry on.']),
-	write('You are comforted'),nl.
-cry(_).
-
-% drink(+Bevarage): buying a bevarage buy talking to a bartender
-drink(_):-
-	use(fakeId),
-	( here(bar) -> write('Guess what?'),nl,
-	write('The bartender just taught you how to change the xml output line to an epoch timestamp in prolog!! '), nl,
-	write('What a smart bartender.'),nl,
-	store_advice(toChangeXMLToTimestamp);
-	write('You can drink only at the bar'),nl).
-drink(Beverage) :-
-	writeSen(['The bartender needs to see some id before you can have your ', Beverage]).
-	
-% pickUp(+Object) picking up an object
-pickUp(iphone) :-
-	add_if_here(iphone),
-	writeSen(['You pick up the iPhone and take peek at the contents. Oh my, there are pictures of Kim on here! Very embarassing pictures... Hmmmm. This might come in handy... ']).
-pickUp(money) :-
-	add_if_here(money),
-	writeSen(['You grab moolah and are ready to rock! Make it rain!']).
-pickUp(fakeId) :-
-	add_if_here(fakeId),
-	writeSen(['Alright a fake id! Go get \'em McLovin...']).
-pickUp(Object):-
-	isObjectHere(Object), 
-	retract(things(Object,_)),
-	asserta(possession(Object)), !,
-	writeSen(['You picked up ', Object]).
-pickUp(_).
-
-add_if_here(Object) :- 
-	isObjectHere(Object), 
-	retract(things(Object,_)),
-	asserta(possession(Object)), !.
-
-drop(Object):-
-	here(Here),
-	possession(Object),
-	retract(possession(Object)),
-	asserta(things(Object,Here)), !,
-	writeSen(['You dropped ',Object,'at the ', Here]).
-drop(_).
-	
-% isObjectHere(+Object) checks if the object the user requested
-% is in the current location.
-isObjectHere(Object) :-
-	here(Here),
-	things(Object, Here), !.
-isObjectHere(Object) :-
-	writeSen([Object, ' is not here']),
-	fail.
-
-% look lists the things in a room, and the connections
-% assertz(here(StartLocation)) at the beginning.
-look:-
-  	here(Here),
-  	writeSen(['You are at the ',Here]),
-  	write('You see the following objects:'), nl,
-  	list_things(Here),
-  	write('You can see the following people:'),nl,
-  	list_peopleAt(Here),
-  	write('You can go to the following places:'),nl,
-  	list_connections(Here).
-
-list_things(Place) :-
-	things(X,Place),
-	tab(2), write(X), nl,
-	fail.
-list_things(_).
-
-list_peopleAt(Place):-
-  	at(X,Place),
-  	tab(2),write(X),nl,
-  	fail.
-list_peopleAt(_).
-
-list_connections(Place):-
-  	connect(Place,X),
-  	tab(2),write(X),nl,
-  	fail.
-list_connections(jail):-
-	tab(2), write('You have no where to go. Try talking to some people.'),nl.
-list_connections(_).
-
-knowledge:-
-	write('You currently know how to:'), nl,
-  	list_knowledge(_).
-  	
-list_knowledge(_):-
-	advice(X), tab(2), write(X), nl, fail.
-list_knowledge(_).
-
-inventory:-
-	write('You currently have:'), nl,
-	list_possession(_).
-
-list_possession(_):-
-	possession(X), tab(2), write(X), nl, fail.
-list_possession(_).
-	
-	
-connect(X,Y):- path(X,Y).
-connect(X,Y):- path(Y,X).
-
-path(house,bar).
-path(house,lab).
-path(bar,lab).

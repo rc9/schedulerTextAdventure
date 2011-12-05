@@ -1,4 +1,5 @@
-%%%%GRAMMAR%%%%%
+%%%% GRAMMAR FILE %%%%%
+
 :-[world].
 
 %phrase(-Predicate, -Object, +InputList, -EmptyList)
@@ -20,6 +21,8 @@ intrans_v(write_code) --> [write,code];[write,some,code].
 intrans_v(help) --> [help];[h].
 intrans_v(quit) --> [quit];[exit];[give,up].
 intrans_v(where) --> [where].
+intrans_v(inventory) --> [inventory].
+intrans_v(knowledge) --> [knowledge];[advice].
 
 %Transitive verbs are used with a person
 %trans_p_v(-Pred, +InputList, -WithoutVerb)
@@ -33,7 +36,7 @@ trans_p_v(bribe) --> [bribe].
 %trans_t_v(-Pred, +InputList, -WithoutVerb)
 trans_t_v(drink) --> [drink].
 trans_t_v(drop) --> [drop];[leave];[abandon].
-trans_t_v(pickUp) --> [pick,up];[take];[pick];[grab].
+trans_t_v(pickUp) --> [pick,up];[take];[pick];[grab];[get].
 
 %% Nouns %%
 %Noun phrase choses to use a determiner or not
@@ -43,8 +46,8 @@ np(SubCat, Obj) --> n_bar(SubCat,Obj).
 
 %N' matches whether the verb needs an object or a person
 %n_bar(-Subcategory, -Object, +InputList, -WithoutNoun)
-n_bar(trans_p, Obj) --> n(Obj), {person(Obj)}.
-n_bar(trans_t, Obj) --> n(Obj). % {thing(Obj)}.
+n_bar(trans_p, Obj) --> {person(Obj)}, n(Obj).
+n_bar(trans_t, Obj) --> {thing(Obj)}, n(Obj).
 n_bar(location, Place) --> n(Place), {place(Place)}.
 
 %Nouns of places
@@ -62,16 +65,13 @@ n(jailer) --> [jailer].
 n(bartender) --> [bartender].
 n(mom) --> [mom];[mother];[ma];[mommy].
 n(brother) --> [brother];[bro].
-n('random stranger') --> [random,stranger].
+n('random stranger') --> [random,stranger];[random].
 
 %Nouns of objects
-n(drink) --> [beer];[soda];[pop];[cocktail].
-n(shoulder) --> [shoulder].
-n(scheduler) --> [scheduler,game];[scheduler].
-n('text adventure game') --> [text,adventure,game];[text,game];[game].
-n(iphone) --> [iphone];[phone].
+n(drink) --> [beer];[soda];[pop];[cocktail];[tequila].
+n('iPhone') --> [iphone];[phone].
 n(money) --> [money];[cash];[dough];[moolah].
-n(fakeId) --> [fake,id];[id].
+n('fake ID') --> [fake,id];[id];[fake].
 n(flowers) --> [flowers].
 
 
@@ -85,28 +85,3 @@ p --> [with];[in];[at].
 %Determiner that may appear with a noun
 %d(+InputList, -WithoutDeterminer)
 d --> [the];[a];[some].
-
- /*
-%Places
-%place(+Place)
-place(home).
-place(bar).
-place(jail).
-place(lab).
-
-%People
-%person(+Person)
-person('TA').
-person('Kim').
-person(policeman).
-person('random stranger').
-person(jailer).
-
-%Things
-%thing(+Thing)
-thing(scheduler).
-thing('text adventure game').
-thing(drink).
-thing(shoulder).
-
-*/
