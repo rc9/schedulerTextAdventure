@@ -72,6 +72,7 @@ n('text adventure game') --> [text,adventure,game];[text,game];[game].
 n(iphone) --> [iphone];[phone].
 n(money) --> [money];[cash];[dough];[moolah].
 n(fakeId) --> [fake,id];[id].
+n(flowers) --> [flowers].
 
 
 %% Prepositions %%
