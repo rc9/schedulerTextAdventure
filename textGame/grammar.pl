@@ -31,8 +31,12 @@ trans_p_v(bribe) --> [bribe].
 %Transitive verbs for objects
 %trans_t_v(-Pred, +InputList, -WithoutVerb)
 trans_t_v(drink) --> [drink].
+<<<<<<< HEAD
 trans_t_v(drop) --> [drop];[leave];[abandon].
 trans_t_v(pickUp) --> [pick up];[take];[pick].
+=======
+trans_t_v(pickUp) --> [pick,up];[grab];[take].
+>>>>>>> origin/master
 
 %% Nouns %%
 %Noun phrase choses to use a determiner or not
@@ -68,6 +72,9 @@ n(drink) --> [beer];[soda];[pop];[cocktail].
 n(shoulder) --> [shoulder].
 n(scheduler) --> [scheduler,game];[scheduler].
 n('text adventure game') --> [text,adventure,game];[text,game];[game].
+n(iphone) --> [iphone];[phone].
+n(money) --> [money];[cash];[dough];[moolah].
+n(fakeId) --> [fake,id];[id].
 
 
 %% Prepositions %%

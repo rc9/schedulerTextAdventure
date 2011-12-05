@@ -45,15 +45,19 @@ punch(Person) :-
 	go(jail)).
 punch(_).
 
-% bribe(+Person) you\'re trying to bribe someone to get easy shortcut.
+% bribe(+Person) you're trying to bribe someone to get easy shortcut.
 bribe(jailer) :-
+	use(money),
 	isHere(jailer),
 	write('I can\'t believe you decided to bribe the jailer...'),nl,
 	write('Oh well...so now you\'re back home. What are you gonna do?'),nl,
 	go(house).
 bribe(Person) :-
+	use(money),
 	isHere(Person),
 	writeSen(['You got a suspicious dirty look from ',Person,'...']).
+bribe(_) :-
+	writeSen(['Your bribe attempt was unsuccessful...']).
 bribe(_).
 	
 % seduce(+Person) you're trying to seduce someone to get out of trouble.
@@ -80,19 +84,36 @@ cry(_).
 
 % drink(+Bevarage): buying a bevarage buy talking to a bartender
 drink(_):-
+	use(fakeId),
 	( here(bar) -> write('Guess what?'),nl,
 	write('The bartender just taught you how to change the xml output line to an epoch timestamp in prolog!! '), nl,
 	write('What a smart bartender.'),nl,
 	store_advice(toChangeXMLToTimestamp);
 	write('You can drink only at the bar'),nl).
+drink(Beverage) :-
+	writeSen(['The bartender needs to see some id before you can have your ', Beverage]).
 	
 % pickUp(+Object) picking up an object
+pickUp(iphone) :-
+	add_if_here(iphone),
+	writeSen(['You pick up the iPhone and take peek at the contents. Oh my, there are pictures of Kim on here! Very embarassing pictures... Hmmmm. This might come in handy... ']).
+pickUp(money) :-
+	add_if_here(money),
+	writeSen(['You grab moolah and are ready to rock! Make it rain!']).
+pickUp(fakeId) :-
+	add_if_here(fakeId),
+	writeSen(['Alright a fake id! Go get \'em McLovin...']).
 pickUp(Object):-
 	isObjectHere(Object), 
 	retract(things(Object,_)),
 	asserta(possession(Object)), !,
 	writeSen(['You picked up ', Object]).
 pickUp(_).
+
+add_if_here(Object) :- 
+	isObjectHere(Object), 
+	retract(things(Object,_)),
+	asserta(possession(Object)), !.
 
 drop(Object):-
 	here(Here),
