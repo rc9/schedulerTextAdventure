@@ -58,7 +58,7 @@ n(lab) --> [lab].
 
 %Nouns of persons
 n(policeman) --> [policeman];[popo];[po-po];[cop].
-n('TA') --> [ta];[kenny];[ben].
+n('TA') --> [ta];[kevin];[ben];[stanley].
 n('Kim') --> [kim].
 n(jailer) --> [jailer].
 n(bartender) --> [bartender].

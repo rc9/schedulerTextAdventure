@@ -118,7 +118,7 @@ writeSen(['You don\'t need to use ', Object, ' to punch...']), punch(Person).
 % punch(+Person)
 % punch the stranger in jail to get his money
 punch(prisoner) :-
-here(jail), !, ( prisonerhasmoney -> 
+    here(jail), !, ( prisonerhasmoney -> 
     write('You just stole all your cell mate\'s money. Maybe you deserve to be in jail...'),nl, 
     assertz(possession(money)), retract(prisonerhasmoney); 
     write('You already took the poor prisoner\'s money! Leave him alone!'),nl).
@@ -140,12 +140,12 @@ bribe(_,Object) :- writeSen(['You can\'t bribe with ', Object]).
 % bribe(+Person)
 % try to bribe someone to get an easy shortcut
 bribe(jailer) :-
-	isHere(jailer),
+	here(jail),
 	( use(money) ->
 	write('I can\'t believe you decided to bribe the jailer...'),nl,
 	write('Oh well...so now you\'re back home. What are you gonna do?'),nl,
-    retract(here(_)),asserta(here(house)),!,look; 
-    write('You have no money! And now the jailer will never let you out. Looks like you\'ll be in jail for a while.')
+    	retract(here(_)),asserta(here(house)),!,look; 
+    	write('You have no money! And now the jailer will never let you out. Looks like you\'ll be in jail for a while.')
 	,nl, write('...'), nl,
 	write('Finally your mom came and rescued you. She does NOT look happy.'),nl,
 	write('On top of all that you missed the project deadline!'), nl,
@@ -153,11 +153,9 @@ bribe(jailer) :-
 	assert(gameover(lost))).
 bribe(Person) :-
 	isHere(Person),
-	use(money),
-	writeSen(['You got a suspicious dirty look from ',Person,'...']).
-bribe(Person) :-
-	isHere(Person),
-	write('Your bribe attempt was unsuccessful...do you even have what you\'re offerring?'),nl.
+	( use(money) ->
+	writeSen(['You got a suspicious dirty look from ',Person,'...']);
+	write('Your bribe attempt was unsuccessful...do you even have what you\'re offerring?'),nl).
 bribe(_).
 
 % seduce(+Person, +Object) 
@@ -168,17 +166,16 @@ seduce(_,Object) :- writeSen(['You can\'t seduce with ', Object]).
 % seduce(+Person)
 % try to seduce someone to get out of trouble
 seduce('TA'):-
-	isHere('TA'),
-	use(flowers),
+	here(lab),
+	(use(flowers)->
 	write('what a corrupted TA... he gave you advice about how to tokenize input'),nl,
-	store_advice('tokenize user input').
-seduce(Person):- 
+	store_advice('tokenize user input');
+	write('You just got shutdown! Maybe you should look for something to help you with this...'), nl).
+seduce(Person):-
 	isHere(Person),
-	use(flowers),
-	write('You\'re not gonna get any work done tonight...'),nl.
-seduce(Person) :-
-	isHere(Person),
-	write('You just got shutdown! Maybe you should look for something to help you with this...'), nl.
+	( use(flowers) ->
+	write('You\'re not gonna get any work done tonight...'),nl;
+	write('You just got shutdown! Maybe you should look for something to help you with this...'), nl).
 seduce(_).
 
 % cry(+Person, +Object) 
@@ -189,20 +186,19 @@ cry(Person,Object) :-
 % cry(+Person)
 % cry on someone's shoulder
 cry(jailer):-
-	isHere(jailer),
+	here(jail),
 	write('You cried to the jailer and with pity he advises you to swtich your project.'), nl,
 	write('Hm...The jailer doesn\'t seem to enjoy his job. Maybe he\'ll take a bribe.'), nl,
 	store_advice('switch a project').
 cry(Person) :-
-	Person \= jailer,
 	isHere(Person),
 	writeSen(['Awwwww ',Person, ' let you borrow a shoulder to cry on.']),
 	write('You are comforted'),nl.
 cry(_).
 
-% drink(+Person, +Object) 
+% drink(+Beverage, +Object) 
 % check if the object passed in is the ID
-drink(Person, 'fake ID') :- drink(Person).
+drink(Beverage, 'fake ID') :- drink(Beverage).
 drink(_,Object) :- writeSen(['You can\'t drink with ', Object]).
 
 % drink(+Bevarage):
@@ -227,16 +223,14 @@ blackmail(_,Object) :- writeSen(['You can\'t blackmail with ', Object]).
 % blackmail(+Person)
 % attempt to blackmail someone to get what you need
 blackmail('Kim') :-
-	isHere('Kim'),
-	( store_advice('import XML file in prolog') ->
-	  %then
-	use(iPhone),
+	here(lab),
+	( not(advice('import XML file in prolog')) ->
+	use(iPhone),asserta(advice('import XML file in prolog')),
 	write('Kim is so grateful you found her iPhone.'),nl,
 	write('But what?! You think she\'ll succumb to embarrassing photos?'), nl,
 	write('HA! She instantly sends them to the cloud, no shame in her eyes.'), nl,
 	write('But because she is so awesome and knows how much you are struggling with this extra difficult problem she decides to give you some advice so long as you never blackmail her again.'),nl,
 	writeSen(['This advice has given you some insight into importing XML files! Sweet!']);
-	  %else
 	write('You disappointed Kim.  Trying to blackmail her again, honestly...'),nl,
 	retract(gameover(_)), assert(gameover(lost))).
 	
@@ -244,6 +238,7 @@ blackmail('Kim') :-
 blackmail(Person) :-
 	isHere(Person),
 	writeSen(['You can\'t blackmail ', Person, '. You don\'t have any dirt to blackmail with!']).
+
 
 % you can't write code while in jail or the bar
 write_code:-
