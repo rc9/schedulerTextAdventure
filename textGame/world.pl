@@ -342,7 +342,7 @@ list_connections(Place):-
   	tab(3),write(X),nl,
   	fail.
 list_connections(jail):-
-	tab(2), write('You have no where to go. Try interacting with someone.'),nl.
+	tab(2), write('You have nowhere to go. Try interacting with someone.'),nl.
 list_connections(_).
 
 % get your knowledge (advice acquired)

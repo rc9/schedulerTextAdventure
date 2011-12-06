@@ -20,7 +20,7 @@ vp(trans_t, Pred) --> trans_t_v(Pred).
 intrans_v(write_code) --> [write,code];[write,some,code].
 intrans_v(help) --> [help];[h].
 intrans_v(quit) --> [quit];[exit];[give,up].
-intrans_v(where) --> [where].
+intrans_v(where) --> [where];[look].
 intrans_v(inventory) --> [inventory].
 intrans_v(knowledge) --> [knowledge];[advice].
 

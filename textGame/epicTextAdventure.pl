@@ -3,7 +3,7 @@
 /** Authors:
 *
 *	Riley Chang     41805086	l1v6
-*	Rob MacEachern
+*	Rob MacEachern  42415091	m9c7
 *	Hanna Yoo
 */
 
@@ -15,7 +15,7 @@
 play :- write('Welcome to the EPIC text adventure game!'), nl, setup, !, loop_thru_game.
 
 % continue playing the game until it is over or user quits
-loop_thru_game :- repeat, make_command(C), do(C), ((C==quit; check_over), !).
+loop_thru_game :- repeat, make_command(C), nl, do(C), ((C==quit; check_over), !).
 
 % make_command(-Command)
 % read in user input to create a command
