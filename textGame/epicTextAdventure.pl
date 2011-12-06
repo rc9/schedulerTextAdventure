@@ -12,7 +12,7 @@
 :-[grammar].
 
 % begin the most epic text adventure game ever!
-play :- write('Welcome to the EPIC text adventure game!'), nl, setup, !, loop_thru_game.
+play :- write('Welcome to the EPIC text adventure game!'), nl, nl, setup, !, loop_thru_game.
 
 % continue playing the game until it is over or user quits
 loop_thru_game :- repeat, make_command(C), nl, do(C), ((C==quit; check_over), !).
@@ -40,14 +40,14 @@ resetWorld:- repeat, (retract(here(_)) -> fail;not(fail)), repeat, (retract(thin
 setup :-
 	resetWorld,
 	dynamic_facts, % inserts initial data to the world
-	write('Your goal as a CS student is to complete a Prolog project and get an A+.'),nl,
-    write('You, of course, needed a challenge and so chose to undertake building a scheduler that would be the envy of the entire class!'), nl,
-    write('You did not forsee the difficulties however, and are having quite a bit of trouble.'), nl,
-    write('With not much time left, you desperately explore your world searching for any hints you can find so you can "write code" that will work.'),nl,
+	write('Your goal as a CS student is to complete a Prolog project and get an A+.'),nl,nl,
+    write('You, of course, needed a challenge and so chose to undertake building a scheduler that would be the envy of the entire class!'), nl, nl,
+    write('You did not foresee the difficulties however, and are having quite a bit of trouble.'), nl, nl,
+    write('With not much time left, you desperately explore your world searching for any hints you can find so you can "write code" that will work.'),nl,nl,
     write('How much advice do you need? Who knows? Better start hunting!'),nl,
 	nl,
-	write('You can type "help" along the way if you need help on how to play.'),nl,
-	write('Good Luck!'),nl,
+	write('You can type "help" along the way if you need help on how to play.'),nl,nl,
+	write('Good Luck!'),nl,nl,
 	look.
 
 % displays possible commands

@@ -57,7 +57,7 @@ n(house) --> [house];[home].
 n(lab) --> [lab].
 
 %Nouns of persons
-n(policeman) --> [policeman];[popo];[po-po].
+n(policeman) --> [policeman];[popo];[po-po];[cop].
 n('TA') --> [ta];[kenny];[ben].
 n('Kim') --> [kim].
 n(jailer) --> [jailer].
