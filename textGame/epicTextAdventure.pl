@@ -11,8 +11,19 @@
 :-[tokenizer].
 :-[grammar].
 
+graphic :-
+	write(' _______  _______ _________ _______'),nl,
+	write('(  ____ \\(  ____ )\\__   __/(  ____ \\'),nl,
+	write('| (    \\/| (    )|   ) (   | (    \\/'),nl,
+	write('| (__    | (____)|   | |   | |      '),nl,
+	write('|  __)   |  _____)   | |   | |      '),nl,
+	write('| (      | (         | |   | |      '),nl,
+	write('| (____/\\| )      ___) (___| (____/\\'),nl,
+	write('(_______/|/       \\_______/(_______/'),nl,nl,
+	write(' Text Adventure!').
+
 % begin the most epic text adventure game ever!
-play :- write('Welcome to the EPIC text adventure game!'), nl, nl, setup, !, loop_thru_game.
+play :- graphic, nl, nl, setup, !, loop_thru_game.
 
 % continue playing the game until it is over or user quits
 loop_thru_game :- repeat, make_command(C), nl, do(C), ((C==quit; check_over), !).
